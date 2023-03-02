@@ -1,0 +1,49 @@
+resource "random_uuid" "generate_uuid" {
+}
+
+# S3 Bucket
+resource "aws_s3_bucket" "private_bucket" {
+  bucket = random_uuid.generate_uuid.result
+
+  force_destroy = true
+}
+
+resource "aws_s3_bucket_acl" "bucket_acl" {
+  bucket = aws_s3_bucket.private_bucket.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_versioning" "bucket_versioning" {
+  bucket = aws_s3_bucket.private_bucket.id
+  versioning_configuration {
+    status = "Disabled"
+  }
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "bucket_config" {
+  bucket = aws_s3_bucket.private_bucket.id
+
+  rule {
+    id     = "storage_class_change"
+    status = "Enabled"
+
+    transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
+
+    expiration {
+      days = 90
+    }
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_encryption" {
+  bucket = aws_s3_bucket.private_bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
