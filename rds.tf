@@ -17,7 +17,7 @@ resource "aws_db_instance" "rds_mysql" {
   instance_class       = "db.t3.micro"
   identifier           = "csye6225"
   username             = "csye6225"
-  password             = "Vandark-1999"
+  password             = var.rds_password
   parameter_group_name = aws_db_parameter_group.rds_pg.name
   db_subnet_group_name = aws_db_subnet_group.rds_private_subnet_group.name
   # security_group_names = [aws_security_group.db_sg.name]    # Deprecated

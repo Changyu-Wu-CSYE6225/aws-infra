@@ -17,3 +17,18 @@ variable "ami_id" {
   type    = string
   default = "ami-057f2978248ea0350"
 }
+
+variable "rds_password" {
+  type    = string
+  default = "password"
+}
+
+variable "zone_id" {
+  type    = string
+  default = "Z03445163ORITSCCAVIB6"
+}
+
+variable "domain" {
+  type    = string
+  default = "dev.changyu.me"
+}
