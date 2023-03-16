@@ -80,7 +80,7 @@ resource "aws_security_group" "db_sg" {
       from_port        = 3306
       to_port          = 3306
       protocol         = "tcp"
-      cidr_blocks      = [aws_vpc.main.cidr_block]
+      cidr_blocks      = []
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = [aws_security_group.web_app_sg.id]
