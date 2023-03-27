@@ -10,7 +10,7 @@
 # EC2 instance Profile
 resource "aws_iam_instance_profile" "iam_instance_profile" {
   name = "iam_instance_profile"
-  role = aws_iam_role.csye6225_s3_role.name
+  role = aws_iam_role.csye6225_role.name
 }
 
 # EC2 key pair

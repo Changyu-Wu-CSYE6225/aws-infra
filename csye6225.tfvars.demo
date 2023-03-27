@@ -1,9 +1,9 @@
 provider_profile = "demo"
 aws_region = "us-east-1"
 
-ami_id = "ami-06e6173665478226f"
+ami_id = "ami-0b406521541769782"
 
-rds_password = "Vandark-1999"
+rds_password = "Vandark-114514"
 
 zone_id = "Z03446931FQME6VPVCJCW"
 domain = "demo.changyu.me"

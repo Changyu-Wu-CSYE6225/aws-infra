@@ -22,7 +22,7 @@ resource "aws_iam_policy" "webapp_s3_policy" {
   })
 }
 
-resource "aws_iam_role" "csye6225_s3_role" {
+resource "aws_iam_role" "csye6225_role" {
   name = "EC2-CSYE6225"
 
   assume_role_policy = jsonencode({
@@ -41,6 +41,11 @@ resource "aws_iam_role" "csye6225_s3_role" {
 }
 
 resource "aws_iam_role_policy_attachment" "s3_role_policy_attach" {
-  role       = aws_iam_role.csye6225_s3_role.name
+  role       = aws_iam_role.csye6225_role.name
   policy_arn = aws_iam_policy.webapp_s3_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "cloudwatch_policy_attach" {
+  role       = aws_iam_role.csye6225_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
