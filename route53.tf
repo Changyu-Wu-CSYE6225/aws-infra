@@ -1,7 +1,11 @@
-resource "aws_route53_record" "dev_a_record" {
+resource "aws_route53_record" "type_a_record" {
   zone_id = var.zone_id
   name    = var.domain
   type    = "A"
-  ttl     = 60
-  records = [aws_instance.web_app.public_ip]
+
+  alias {
+    name                   = aws_lb.webapp_lb.dns_name
+    zone_id                = aws_lb.webapp_lb.zone_id
+    evaluate_target_health = true
+  }
 }
