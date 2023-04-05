@@ -13,29 +13,7 @@ resource "aws_security_group" "web_app_sg" {
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
-      security_groups  = []
-      self             = false
-    },
-    {
-      description      = "HTTPS ingress"
-      from_port        = 80
-      to_port          = 80
-      protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      security_groups  = []
-      self             = false
-    },
-    {
-      description      = "HTTPS ingress"
-      from_port        = 443
-      to_port          = 443
-      protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      security_groups  = []
+      security_groups  = [aws_security_group.load_balancer_sg.id]
       self             = false
     },
     {
@@ -46,7 +24,7 @@ resource "aws_security_group" "web_app_sg" {
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
-      security_groups  = []
+      security_groups  = [aws_security_group.load_balancer_sg.id]
       self             = false
     }
   ]
@@ -88,21 +66,55 @@ resource "aws_security_group" "db_sg" {
     }
   ]
 
-  #   egress = [
-  #     {
-  #       description      = ""
-  #       from_port        = 0
-  #       to_port          = 0
-  #       protocol         = "-1"
-  #       cidr_blocks      = ["0.0.0.0/0"]
-  #       ipv6_cidr_blocks = []
-  #       prefix_list_ids  = []
-  #       security_groups  = []
-  #       self             = false
-  #     }
-  #   ]
-
   tags = {
     Name = "Database security group"
+  }
+}
+
+# Load Balancer sg
+resource "aws_security_group" "load_balancer_sg" {
+  name        = "load_balancer_sg"
+  description = "Application Load Balancer Security Group"
+  vpc_id      = aws_vpc.main.id
+
+  ingress = [
+    {
+      description      = "HTTPS ingress"
+      from_port        = 80
+      to_port          = 80
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
+    },
+    {
+      description      = "HTTPS ingress"
+      from_port        = 443
+      to_port          = 443
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
+    },
+  ]
+
+  egress {
+    description      = ""
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = []
+    prefix_list_ids  = []
+    security_groups  = []
+    self             = false
+  }
+
+  tags = {
+    Name = "Load Balancer Security Group"
   }
 }
