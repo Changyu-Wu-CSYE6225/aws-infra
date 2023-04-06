@@ -54,7 +54,8 @@ resource "aws_launch_template" "asg_launch_config" {
       echo DB_HOSTNAME=${aws_db_instance.rds_mysql.address} >> /home/ec2-user/webapp/.env
       echo S3_BUCKET_NAME=${aws_s3_bucket.private_bucket.bucket} >> /home/ec2-user/webapp/.env
       echo BUCKET_REGION=${var.aws_region} >> /home/ec2-user/webapp/.env
-
+      
+      sudo chown -R ec2-user:ec2-user /home/ec2-user/webapp/.env
       sudo systemctl start webapp.service
     EOF
   )

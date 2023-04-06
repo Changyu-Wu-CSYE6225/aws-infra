@@ -26,6 +26,7 @@ resource "aws_lb_target_group" "webapp_lb_tg" {
     interval            = 30
     path                = "/healthz"
     port                = var.port
+    protocol            = "HTTP"
     matcher             = "200"
   }
 }

@@ -1,7 +1,7 @@
 provider_profile = "dev"
 aws_region = "us-east-1"
 
-ami_id = "ami-00cde14ab16c7aaa8"
+ami_id = "ami-03821316f1952e97a"
 
 rds_password = "Vandark-114514"
 
