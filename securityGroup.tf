@@ -10,7 +10,7 @@ resource "aws_security_group" "web_app_sg" {
       from_port        = 22
       to_port          = 22
       protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"]
+      cidr_blocks      = [var.aws_vpc_main_cidr_block]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = [aws_security_group.load_balancer_sg.id]
@@ -21,7 +21,7 @@ resource "aws_security_group" "web_app_sg" {
       from_port        = 5001
       to_port          = 5001
       protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"]
+      cidr_blocks      = [var.aws_vpc_main_cidr_block]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = [aws_security_group.load_balancer_sg.id]

@@ -8,4 +8,8 @@ resource "aws_route53_record" "type_a_record" {
     zone_id                = aws_lb.webapp_lb.zone_id
     evaluate_target_health = true
   }
+
+  depends_on = [
+    aws_lb.webapp_lb
+  ]
 }
