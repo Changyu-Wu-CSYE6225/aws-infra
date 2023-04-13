@@ -42,3 +42,8 @@ variable "port" {
   type    = string
   default = 5001
 }
+
+variable "ssl_certificate_arn" {
+  type    = string
+  default = "ssl certificate arn"
+}

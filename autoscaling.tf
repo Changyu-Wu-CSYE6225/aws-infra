@@ -2,7 +2,6 @@
 resource "aws_autoscaling_group" "asg" {
   name             = "autoscaling_group"
   default_cooldown = 60
-  #   launch_configuration = aws_launch_template.asg_launch_config.name
   min_size         = 1
   max_size         = 3
   desired_capacity = 1

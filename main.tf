@@ -43,6 +43,7 @@ resource "aws_launch_template" "asg_launch_config" {
       encrypted             = true
       volume_size           = 50
       volume_type           = "gp2"
+      kms_key_id            = aws_kms_key.ebs_kms_key.arn
     }
   }
 

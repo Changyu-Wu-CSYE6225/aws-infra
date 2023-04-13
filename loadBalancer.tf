@@ -34,19 +34,27 @@ resource "aws_lb_target_group" "webapp_lb_tg" {
 # Find a certificate that is issued
 # data "aws_acm_certificate" "webapp_lb_certificate" {
 #   domain = var.domain
-#   #   statuses = ["ISSUED"]
-#   statuses = ["PENDING_VALIDATION"]
+#   statuses = ["ISSUED"]
 # }
 
 # Load Balancer Listener
-resource "aws_lb_listener" "webapp_lb_listener" {
+# resource "aws_lb_listener" "webapp_lb_listener_http" {
+#   load_balancer_arn = aws_lb.webapp_lb.arn
+#   port              = 80
+#   protocol          = "HTTP"
+
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.webapp_lb_tg.arn
+#   }
+# }
+
+resource "aws_lb_listener" "webapp_lb_listener_https" {
   load_balancer_arn = aws_lb.webapp_lb.arn
-  port              = 80
-  protocol          = "HTTP"
-  #   port              = "443"
-  #   protocol          = "HTTPS"
+  port              = 443
+  protocol          = "HTTPS"
   #   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  #   certificate_arn   = data.aws_acm_certificate.webapp_lb_certificate.arn
+  certificate_arn = var.ssl_certificate_arn
 
   default_action {
     type             = "forward"

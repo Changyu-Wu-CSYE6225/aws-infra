@@ -24,6 +24,8 @@ resource "aws_db_instance" "rds_mysql" {
   vpc_security_group_ids = [aws_security_group.db_sg.id]
   publicly_accessible    = false
   skip_final_snapshot    = true
+  storage_encrypted      = true
+  kms_key_id             = aws_kms_key.rds_kms_key.arn
 }
 
 # RDS Private subnet group
