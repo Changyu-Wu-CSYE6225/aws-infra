@@ -6,22 +6,24 @@ resource "aws_security_group" "web_app_sg" {
 
   ingress = [
     {
-      description      = "HTTPS ingress"
-      from_port        = 22
-      to_port          = 22
-      protocol         = "tcp"
-      cidr_blocks      = [var.aws_vpc_main_cidr_block]
+      description = "HTTPS ingress"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      #   cidr_blocks      = [var.aws_vpc_main_cidr_block]
+      cidr_blocks      = []
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = [aws_security_group.load_balancer_sg.id]
       self             = false
     },
     {
-      description      = "Web server"
-      from_port        = 5001
-      to_port          = 5001
-      protocol         = "tcp"
-      cidr_blocks      = [var.aws_vpc_main_cidr_block]
+      description = "Web server"
+      from_port   = 5001
+      to_port     = 5001
+      protocol    = "tcp"
+      #   cidr_blocks      = [var.aws_vpc_main_cidr_block]
+      cidr_blocks      = []
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = [aws_security_group.load_balancer_sg.id]
@@ -78,17 +80,17 @@ resource "aws_security_group" "load_balancer_sg" {
   vpc_id      = aws_vpc.main.id
 
   ingress = [
-    {
-      description      = "HTTPS ingress"
-      from_port        = 80
-      to_port          = 80
-      protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      security_groups  = []
-      self             = false
-    },
+    # {
+    #   description      = "HTTP ingress"
+    #   from_port        = 80
+    #   to_port          = 80
+    #   protocol         = "tcp"
+    #   cidr_blocks      = ["0.0.0.0/0"]
+    #   ipv6_cidr_blocks = []
+    #   prefix_list_ids  = []
+    #   security_groups  = []
+    #   self             = false
+    # },
     {
       description      = "HTTPS ingress"
       from_port        = 443

@@ -1,9 +1,14 @@
+# Profile
 provider_profile = "demo"
-aws_region = "us-east-1"
+aws_region       = "us-east-1"
 
-ami_id = "ami-0b406521541769782"
+# AMI
+ami_id = "ami-04665aff465c45921"
 
+# RDS
 rds_password = "Vandark-114514"
 
-zone_id = "Z03446931FQME6VPVCJCW"
-domain = "demo.changyu.me"
+# Route53
+zone_id             = "Z03446931FQME6VPVCJCW"
+domain              = "demo.changyu.me"
+ssl_certificate_arn = "arn:aws:acm:us-east-1:005613189821:certificate/a9a12c98-e7cd-48e6-a0b3-877b64cfa39a"
